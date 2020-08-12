@@ -8,7 +8,7 @@ def get_last_page():
     soup = BeautifulSoup(result.text, "html.parser")
     pages = soup.find("div", {"class": "tplPagination newVer short clear"}).find_all("span")
     last_page = pages[-1].get_text(strip=True)
-    return int(1)
+    return int(last_page)
 
 
 def extract_job(html):

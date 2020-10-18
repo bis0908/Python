@@ -1,11 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-#limit = 50
-url = f"https://stackoverflow.com/jobs?q=data+analysis&sort=i"
-
-
-def get_last_page():
+def get_last_page(url):
     result = requests.get(url)
     soup = BeautifulSoup(result.text, "html.parser")
     pages = soup.find("div", {"class": "s-pagination"}).find_all("a")
@@ -25,10 +21,10 @@ def extract_job(html):
         'apply_link' : f"https://stackoverflow.com/jobs/{job_id}"
     }
     
-def extract_jobs(last_page):
+def extract_jobs(last_page, url):
     jobs = []
     for page in range(last_page):
-        print(f"Searching Data analysis jobs in StackoverFlow.com...page: {page}")
+        print(f"Searching jobs in StackoverFlow.com...page: {page}")
         result = requests.get(f"{url}&pg={page+1}")
         soup = BeautifulSoup(result.text, "html.parser")
         results = soup.find_all("div", {"class": "-job"})
@@ -37,7 +33,8 @@ def extract_jobs(last_page):
             jobs.append(job)
     return jobs
 
-def get_jobs():
-    last_page = get_last_page()
-    jobs = extract_jobs(last_page)
+def get_jobs(word): #사용자가 입력한 word에 +로 SO url을 만든다.
+    url = f"https://stackoverflow.com/jobs?q={word}&sort=i" # from Web_scraper의 word를 가져온다.
+    last_page = get_last_page(url) #그 url의 마지막 페이지를 구한다.
+    jobs = extract_jobs(last_page, url) #이를 통해 jobs를 추출한다.
     return jobs

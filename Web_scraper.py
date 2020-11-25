@@ -39,6 +39,7 @@ def report():
                             )
 
 @app.route("/export")
+
 def export():
     try:
         word = request.args.get('word') #export로 간다면 첫번째로 해당 word가 url에 있는지 체크.

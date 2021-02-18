@@ -1,0 +1,9 @@
+
+# 차트에서 한글 지원 
+import matplotlib.pyplot as plt
+plt.rcParams['font.family'] = 'Malgun Gothic'
+
+# 음수 부호 지원 
+import matplotlib
+matplotlib.rcParams['axes.unicode_minus'] = False
+

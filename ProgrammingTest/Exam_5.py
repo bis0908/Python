@@ -1,3 +1,5 @@
+# 미완성 코드입니다
+
 # 연못 크기 공백 구분하여 입력받기
 n, m = map(int, input().split())
 
@@ -13,7 +15,8 @@ def dfs(x, y):
 
     # 상하좌우를 비교하려면 현재 셀은 상하좌우 셀이 모두 있는 경우에만 해당. 즉 (1,1) ~ (8,8)
     # 만약 현재 셀의 상하좌우 모두의 깊이가 자신보다 같거나 크다면
-    if graph[x][y] <= (graph[x-1][y] * graph[x][y-1] * graph[x+1][y] * graph[x][y+1]):
+
+    if graph[x][y] <= (graph[x-1][y] * graph[x][y-1] * graph[x+1][y] * graph[x][y+1]): # IndexError: list index out of range
         graph[x][y] += 1 # 현재 셀 깊이 증가
         return True
     return False

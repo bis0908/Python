@@ -1,41 +1,40 @@
-# 미완성 코드입니다.
 
-from abc import ABCMeta, abstractmethod
-from itertools import cycle
+class BakingMachine(object):
 
-class BakingMachine(metaclass=ABCMeta):
-    def __init__(self):
-        self.recipe = {}
-
-    @abstractmethod
-    def recipe(self):
-        pass
+    def create_bread(self, breadtype):
+        if breadtype == 'cream':
+            bread = Cream()
+        elif breadtype == 'sugar':
+            bread = Sugar()
+        elif breadtype == 'butter':
+            bread = Butter()
+        else:
+            print("잘못 입력하셨습니다.")
+        return bread
 
 # 빵마다 레시피가 있고 각 recipe 마다 material 3개씩 들어간다
 
-class Cream(BakingMachine):
+class Cream():
     def recipe(self):
-        self.recipe = {'flour': 100, 'water': 100, 'cream': 200}
+        material = {'flour': 100, 'water': 100, 'cream': 200}
+        return material
 
-class Sugar(BakingMachine):
+class Sugar():
     def recipe(self):
-        self.recipe = {'flour': 100, 'water': 50, 'sugar': 200}
+        material = {'flour': 100, 'water': 50, 'sugar': 200}
+        return material
 
-class Butter(BakingMachine):
+class Butter():
     def recipe(self):
-        self.recipe = {'flour': 100, 'water': 100, 'butter': 50}
+        material = {'flour': 100, 'water': 100, 'butter': 50}
+        return material
 
-# cycle 함수를 이용하여 recipe length 만큼 반복 순환 처리
-class Bread(object):
-    def bread_property(self, bread_type):
-        eval(bread_type)().recipe()
-        recipe_cycle = cycle(self.recipe)
-        print("recipe")
-        for i in range(len(self.recipe)):
-            dickey = next(recipe_cycle)
-            print(dickey, self.recipe[dickey])
-
-if __name__ == '__main__':
-    prpty = Bread()
-    brd = str(input("breadType: "))
-    prpty.bread_property(brd)
+baking_machine = BakingMachine()
+bread = ['cream', 'sugar', 'butter']
+for i in range(len(bread)):
+    print("breadType: {}".format(bread[i]))
+    baker = baking_machine.create_bread(bread[i])
+    print("recipe")
+    for key, value in baker.recipe().items():
+        print("{}: {}".format(key, value))
+    print()

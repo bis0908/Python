@@ -6,10 +6,8 @@ Created on Wed Mar 31 11:28:23 2021
 """
 
 from flask import Flask, render_template, request, redirect
-from Table_maker import table_info # User Function
+from Table_maker import table_info # User_Function
 
-# from code_finder import code_finder, name_finder # User Function
-# from exporter import save_to_file # User Function
 
 app = Flask(__name__) # Flask 생성자 -> application 생성
 
@@ -20,9 +18,9 @@ def index():
 @app.route('/report')
 def report():
     word = request.args.get('word')
+
     if word:
         sales_img, density_img, trans_sales, trans_den = table_info(word)
-        # sales_den = zip(trans_sales.items(), trans_den.items())
     else:
         return redirect('/') # word를 입력하지 않으면 리다이렉트 (home으로)
 
@@ -30,10 +28,9 @@ def report():
                            word = str(word),
                            sales_dict = trans_sales,
                            den_dict = trans_den,
-                           # sales_den = sales_den,
                            graph1 = sales_img,
                            graph2 = density_img)
 
 # 프로그램 시작점
 if __name__ == '__main__':
-    app.run() # 애플리케이션 실행
+    app.run(debug = True) # 애플리케이션 실행

@@ -8,7 +8,7 @@ import seaborn as sb
 # 이미지 저장을 위한 모듈
 import os
 
-def table_info(word):
+def table_Info(word):
     # index.html에서 입력받은 도로명을 기반으로 similarity 함수를 통해 업종 매출,
     # 밀집도 상위 데이터를 dict로 반환
     sales_dict, den_dict = similarity(word)
@@ -33,13 +33,11 @@ def table_info(word):
     # for filename in os.listdir('static/images'):
     #     if filename.startswith('sales_rank_'):  # 타 이미지 삭제를 방지
     #         os.remove('static/images/' + filename)
-
     for filename in os.listdir('static/images'):
         if filename.startswith(sales_img):
             os.open(BASE_DIR + '/WebPage/static/images/' + sales_img, os.O_RDONLY)
         else:
             plt.savefig(BASE_DIR + '/WebPage/static/images/' + sales_img)
-
     density_rank = pd.DataFrame(den_dict.items(), columns = ['업종명', '당월매출금액'])
     density_rank.plot(kind = 'bar', x = '업종명', y = '당월매출금액', color = colors, edgecolor='black', legend = False)
     plt.title('밀집도별 평균 매출 Top')

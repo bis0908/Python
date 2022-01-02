@@ -6,7 +6,7 @@ Created on Wed Mar 31 11:28:23 2021
 """
 
 from flask import Flask, render_template, request, redirect
-from Table_maker import table_info # User_Function
+from Table_maker import table_Info # User_Function
 
 
 app = Flask(__name__) # Flask 생성자 -> application 생성
@@ -20,7 +20,7 @@ def report():
     word = request.args.get('word')
 
     if word:
-        sales_img, density_img, trans_sales, trans_den = table_info(word)
+        sales_img, density_img, trans_sales, trans_den = table_Info(word)
     else:
         return redirect('/') # word를 입력하지 않으면 리다이렉트 (home으로)
 
